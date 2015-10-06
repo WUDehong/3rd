@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>表格处理</title>
+<script>
+	function  addRows(){
+		var  table = document.getElementById("ta");//获取表格元素对象.
+		var tr = table.insertRow(table.rows.length);//增加一行
+		tr.innerHTML="<td><input type='text' name='product' value=''/></td><td>b</td><td>c</td><td>add</td>";
+		//alert(table.rows.length);
+	}
+	//更新原来表格中的指定的数据。
+	function   update(){
+		var  table = document.getElementById("ta");//获取表格元素对象.
+		for(i=1;i<table.rows.length;i++){
+			
+			table.rows[i].cells[1].innerHTML="<input type='text' name='amount' value='"+table.rows[i].cells[1].innerText+"'/>";
+		}
+	}
+	function  save(){
+		var  table = document.getElementById("ta");//获取表格元素对象
+		var as = document.getElementsByName("amount");
+		//alert(as.length);
+		var length = as.length;
+		var i = 1;
+		for(i=0;i<length;i++){
+			//alert(table.rows[i].cells[1]);
+			var tr = table.rows[i+1];
+			//alert(i);alert(length);
+			tr.cells[1].innerHTML=as[i].value;/*当cells[1]的rows(1)加载了as[0]的值时，as长度减少一位，故原来的第三位变为第二位，因此rows(2)加载的现在的as[1],即原来的第三位as[2].到这里as长度已经为2了，后面的两个数据就丢失了*/
+			alert(i);	alert(as.length);
+		}
+			
+	}
+</script>
+</head>
+
+<body>
+<form   action=""  method="post">
+	<input type="button" value="增加一行" onclick="addRows()" /><input type="button" value="修改数量" onclick="update()" /><input type="button" value="保存" onclick="save()" /><br />
+<table  id ="ta" border=1px align="center">
+	<caption>商品采购单</caption>
+	<tr><th>产品</th><th>数量</th><th>价格</th></tr>
+	<tr>
+		<td>oracle</td><td>100</td><td>$10000</td>
+	</tr>
+    <tr>
+		<td>mysql</td><td>10</td><td>$10000</td>
+	</tr>
+    <tr>
+		<td>sqlserver</td><td>200</td><td>$10000</td>
+	</tr>
+    <tr>
+		<td>DB2</td><td>100</td><td>$10000</td>
+	</tr>
+</table>
+</form>
+</body>
+</html>
+<script>
+//获取表格元素中的相关属性 
+	function  tableOperate(){
+	var  table = document.getElementById("ta");//获取表格元素对象.
+	var  rows  = table.rows;//表格中所有的行对象
+	alert(rows.length);
+	for(i=0;i<rows.length;i++){
+		tr = rows[i];//表格中的每一行tr
+		tds = tr.childNodes;//是当前行中的所有子元素，包括td。。
+		for(j=0;j<tds.length;j++){
+			//alert(tds[j].innerHTML);
+				
+		}
+		if(i!=0)tr.innerHTML="<td>DB2</td><td>100</td><td>$10000</td><td>add</td>";;	//alert(tr.innerHTML+"===text====:"+tr.innerText);	
+	}
+	}
+</script>
